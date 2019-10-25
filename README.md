@@ -5,7 +5,7 @@ The example resides in `Main.hs`.
 
 To run it:
 
-    runhaskell Main.hs foo bar -v bip bap --help
+    runhaskell Main.hs foo bar -v bip bap --help --name Fumbleton
 
 The main parsing module is `Args.hs`.
 

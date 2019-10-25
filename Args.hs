@@ -11,7 +11,8 @@ data ParsedArgs a = ParsedArgs {
 
 data Opt a = Opt {
     ids :: [String] 
-  , handler :: String -> a -> a
+  , flag :: Bool
+  , handler :: String -> a -> [String] -> a
   }
 
 -- | Given a string 'ident' identifier and a list of 'Opt's,
@@ -36,9 +37,12 @@ parse (ident:idents) opts acc =
   case findOpt ident opts of
     Just opt ->
       let handle = handler opt
-          newOpts = handle ident (options acc)
+          optsSoFar = options acc
+          newOpts = handle ident optsSoFar idents
           newAcc = acc { options = newOpts }
-       in parse idents opts newAcc
+          remainingRawArgs = if flag opt then idents
+                             else tail idents  
+       in parse remainingRawArgs opts newAcc
     Nothing -> 
       let newPositional = ident:(positional acc)
           newAcc = acc { positional = newPositional } 
