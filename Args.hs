@@ -14,6 +14,9 @@ data Opt a = Opt {
   , handler :: String -> a -> a
   }
 
+-- | Given a string 'ident' identifier and a list of 'Opt's,
+-- the 'findOpt' function will find the 'Opt' (if any)
+-- that has 'ident' as one of its 'ids'.
 findOpt :: String -> [Opt a] -> Maybe (Opt a)
 findOpt ident [] = Nothing
 findOpt ident (x:xs) =
@@ -21,6 +24,10 @@ findOpt ident (x:xs) =
     True -> Just x
     False -> findOpt ident xs
 
+-- | Given a list of raw command line arguments (strings),
+-- a list of 'Opt's, and a default 'ParsedArgs' record,
+-- the 'parse' function will return a 'ParsedArgs' record
+-- with parsed 'options' and 'positional' arguments.
 parse :: [String] -> [Opt a] -> ParsedArgs a -> ParsedArgs a
 parse [] args acc = 
   let positionalArgs = reverse (positional acc)

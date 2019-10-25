@@ -2,8 +2,8 @@ module Main (main) where
 
 import System.Environment (getArgs)
 import Data.List (intercalate)
+
 import Args
-import Fibs
 import CLI
 
 main = do
@@ -16,5 +16,4 @@ main = do
   putStrLn $ "Verbose: " ++ (show verbose_opt)
   putStrLn $ "Help: " ++ (show help_opt)
   putStrLn $ "Positional args: " ++ (intercalate ", " pos)
-  putStrLn $ (msg "Lorem ipsum")
   putStrLn "Done."
