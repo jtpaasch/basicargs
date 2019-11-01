@@ -42,5 +42,6 @@ defaults = ParsedArgs {
       , help = False
       , name = Nothing
       }
+  , invalid = []
   , positional = []
   }

@@ -10,6 +10,7 @@ main = do
   rawArgs <- getArgs
   let args = parse rawArgs optSpecs defaults
   let opts = options args
+  let invalids = invalid args
   let pos = positional args
   let verbose_opt = verbose opts
   let help_opt = help opts
@@ -19,5 +20,6 @@ main = do
   case name_opt of
     Just n -> putStrLn $ "Name: " ++ n
     Nothing -> putStrLn "Name: none given"
+  putStrLn $ "Invalid opts: " ++ (intercalate ", " invalids)
   putStrLn $ "Positional args: " ++ (intercalate ", " pos)
   putStrLn "Done."
